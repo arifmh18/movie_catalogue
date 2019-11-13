@@ -162,7 +162,7 @@
 
     <string name="display" translatable="false">Display</string>
     <string name="setting" translatable="false">Setting</string>
-    <string name="btn_kembali" translatable="false">Kembali</string>
+    <string name="btn_kembali" translatable="false">Back</string>
     <string name="year" translatable="false">Year</string>
     <string name="score" translatable="false">Score Viewer</string>
 </resources>
