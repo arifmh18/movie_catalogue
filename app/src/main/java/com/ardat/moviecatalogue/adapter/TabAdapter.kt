@@ -1,12 +1,17 @@
 package com.ardat.moviecatalogue.adapter
 
-import androidx.fragment.app.Fragment
+import android.content.Context
+    import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.ardat.moviecatalogue.R
 import com.ardat.moviecatalogue.fragment.MovieFragment
 import com.ardat.moviecatalogue.fragment.TvFragment
 
-class TabAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class TabAdapter(mContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+    private var mv = mContext.resources.getString(R.string.movie)
+    private var tv = mContext.resources.getString(R.string.tv)
 
     override fun getItem(position: Int): Fragment? {
         when (position) {
@@ -21,10 +26,11 @@ class TabAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
+
         return when (position){
-            0 -> "Movie"
+            0 -> mv
             else -> {
-                return "Serial TV"
+                return tv
             }
         }
     }

@@ -166,4 +166,6 @@
     <string name="btn_kembali" translatable="false">Kembali</string>
     <string name="year" translatable="false">Tahun</string>
     <string name="score" translatable="false">Nilai Penonton</string>
+    <string name="movie" translatable="false">Film</string>
+    <string name="tv" translatable="false">Serial TV</string>
 </resources>

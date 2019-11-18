@@ -165,4 +165,6 @@
     <string name="btn_kembali" translatable="false">Back</string>
     <string name="year" translatable="false">Year</string>
     <string name="score" translatable="false">Score Viewer</string>
+    <string name="movie" translatable="false">Movie</string>
+    <string name="tv" translatable="false">TV Series</string>
 </resources>

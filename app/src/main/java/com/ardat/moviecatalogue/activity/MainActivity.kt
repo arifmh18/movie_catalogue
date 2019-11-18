@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         main_setting = findViewById<ImageButton>(R.id.main_setting)
         main_tab = findViewById<TabLayout>(R.id.main_tab)
 
-        main_viewPager?.adapter = TabAdapter(supportFragmentManager)
+        main_viewPager?.adapter = TabAdapter(this, supportFragmentManager)
         main_tab?.setupWithViewPager(main_viewPager)
 
         main_setting?.setOnClickListener {
