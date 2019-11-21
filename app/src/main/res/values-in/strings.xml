@@ -168,4 +168,5 @@
     <string name="score" translatable="false">Nilai Penonton</string>
     <string name="movie" translatable="false">Film</string>
     <string name="tv" translatable="false">Serial TV</string>
+    <string name="api_key" translatable="false">441f41bf2b06a320c6bcc8b1f1e8c352</string>
 </resources>

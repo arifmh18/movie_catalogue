@@ -9,14 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.ardat.moviecatalogue.activity.MovieDetailActivity
 import com.ardat.moviecatalogue.R
-import com.ardat.moviecatalogue.model.ResultMovieModel
+import com.ardat.moviecatalogue.activity.TvDetailActivity
+import com.ardat.moviecatalogue.model.ResultTvModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 
-class MovieAdapter (private val context: Context?, private val movie : ArrayList<ResultMovieModel>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieTvAdapter (private val context: Context?, private val movie : ArrayList<ResultTvModel>) : RecyclerView.Adapter<MovieTvAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
@@ -37,14 +37,14 @@ class MovieAdapter (private val context: Context?, private val movie : ArrayList
         private var judulMovie = view.findViewById<TextView>(R.id.judulMovie)
         private var item_list = view.findViewById<ConstraintLayout>(R.id.item_list)
 
-        internal fun bind(movie: ResultMovieModel){
+        internal fun bind(movie: ResultTvModel){
             val img = "https://image.tmdb.org/t/p/w154"+movie.poster_path
-            judulMovie.text = movie.title
+            judulMovie.text = movie.name
             Glide.with(context).load(img).apply(RequestOptions.skipMemoryCacheOf(true)).apply(
                 RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE)).into(gambarMovie)
 
             item_list.setOnClickListener {
-                val intent = Intent(context, MovieDetailActivity::class.java)
+                val intent = Intent(context, TvDetailActivity::class.java)
                 intent.putExtra("data",movie)
                 context?.startActivity(intent)
             }

@@ -11,8 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ardat.moviecatalogue.activity.MovieDetailActivity
 import com.ardat.moviecatalogue.model.MovieModel
 import com.ardat.moviecatalogue.R
+import com.ardat.moviecatalogue.model.ResultMovieModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 
-class GridAdapter (private val context: Context?, private val movie : ArrayList<MovieModel>) : RecyclerView.Adapter<GridAdapter.ViewHolder>() {
+class GridAdapter (private val context: Context?, private val movie : ArrayList<ResultMovieModel>) : RecyclerView.Adapter<GridAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_grid, parent, false)
@@ -31,8 +35,11 @@ class GridAdapter (private val context: Context?, private val movie : ArrayList<
         private var gambarMovie = view.findViewById<ImageView>(R.id.grid_gambarMovie)
         private var item_grid = view.findViewById<ConstraintLayout>(R.id.item_grid)
 
-        internal fun bind(movie: MovieModel){
-            gambarMovie.setImageResource(movie.gambarMovie!!)
+        internal fun bind(movie: ResultMovieModel){
+            val img = "https://image.tmdb.org/t/p/w185"+movie.poster_path
+            Glide.with(context).load(img).apply(RequestOptions.skipMemoryCacheOf(true)).apply(
+                RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE)).into(gambarMovie)
+
             item_grid?.setOnClickListener {
                 val intent = Intent(context, MovieDetailActivity::class.java)
                 intent.putExtra("data",movie)

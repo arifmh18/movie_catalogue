@@ -1,6 +1,5 @@
 package com.ardat.moviecatalogue.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,11 +9,12 @@ import android.widget.TextView
 import com.ardat.moviecatalogue.R
 import com.ardat.moviecatalogue.model.MovieModel
 import com.ardat.moviecatalogue.model.ResultMovieModel
+import com.ardat.moviecatalogue.model.ResultTvModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 
-class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
+class TvDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var detail_back : Button? = null
     private var detail_gambar : ImageView? = null
     private var detail_judul : TextView? = null
@@ -31,12 +31,12 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun ambilData() {
-        val data = intent.getParcelableExtra<ResultMovieModel>("data")
+        val data = intent.getParcelableExtra<ResultTvModel>("data")
 
-        detail_judul?.text = data.title
+        detail_judul?.text = data.name
         detail_deskripsi?.text = data.overview
         detail_score?.text = data.vote_average.toString()
-        detail_tahun?.text = data.release_date
+        detail_tahun?.text = data.first_air_date
         val img = "https://image.tmdb.org/t/p/w185"+data.poster_path
         Glide.with(this).load(img).apply(RequestOptions.skipMemoryCacheOf(true)).apply(
             RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE)).into(detail_gambar)

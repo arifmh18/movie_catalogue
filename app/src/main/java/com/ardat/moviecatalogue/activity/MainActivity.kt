@@ -37,4 +37,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        println("paap destroy")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        println("paap start")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        println("paap stop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        println("paap restart")
+    }
 }

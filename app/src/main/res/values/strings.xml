@@ -167,5 +167,6 @@
     <string name="score" translatable="false">Score Viewer</string>
     <string name="movie" translatable="false">Movie</string>
     <string name="tv" translatable="false">TV Series</string>
+    <string name="api_key" translatable="false">441f41bf2b06a320c6bcc8b1f1e8c352</string>
 
 </resources>
