@@ -6,7 +6,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ResultTvModel(
     var vote_average : Double?,
-    var vote_count : Int?,
     var poster_path : String?,
     var id : Int?,
     var name : String?,

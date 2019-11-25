@@ -114,7 +114,7 @@ class TvFragment : Fragment(), View.OnClickListener {
                     rmm = ArrayList()
 
                     for(i in 0 until tv!!.size) {
-                        rmm!!.add(ResultTvModel(tv!!.get(i).vote_average, tv!!.get(i).vote_count, tv!!.get(i).poster_path, tv!!.get(i).id, tv!!.get(i).name,  tv!!.get(i).overview,  tv!!.get(i).first_air_date))
+                        rmm!!.add(ResultTvModel(tv!!.get(i).vote_average, tv!!.get(i).poster_path, tv!!.get(i).id, tv!!.get(i).name,  tv!!.get(i).overview,  tv!!.get(i).first_air_date))
                     }
 
                     showRecyclerList()

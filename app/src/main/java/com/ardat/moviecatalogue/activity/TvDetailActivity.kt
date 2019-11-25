@@ -7,8 +7,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.ardat.moviecatalogue.R
-import com.ardat.moviecatalogue.model.MovieModel
-import com.ardat.moviecatalogue.model.ResultMovieModel
 import com.ardat.moviecatalogue.model.ResultTvModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy

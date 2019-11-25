@@ -116,7 +116,7 @@ class MovieFragment : Fragment(), View.OnClickListener {
                     rmm = ArrayList()
 
                     for(i in 0 until movie!!.size) {
-                        rmm!!.add(ResultMovieModel(movie!!.get(i).vote_average, movie!!.get(i).vote_count, movie!!.get(i).poster_path, movie!!.get(i).id, movie!!.get(i).title,  movie!!.get(i).overview,  movie!!.get(i).release_date))
+                        rmm!!.add(ResultMovieModel(movie!!.get(i).vote_average, movie!!.get(i).poster_path, movie!!.get(i).id, movie!!.get(i).title,  movie!!.get(i).overview,  movie!!.get(i).release_date))
                     }
 
                     showRecyclerList()

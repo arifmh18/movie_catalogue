@@ -40,8 +40,7 @@ class MovieAdapter (private val context: Context?, private val movie : ArrayList
         internal fun bind(movie: ResultMovieModel){
             val img = "https://image.tmdb.org/t/p/w154"+movie.poster_path
             judulMovie.text = movie.title
-            Glide.with(context).load(img).apply(RequestOptions.skipMemoryCacheOf(true)).apply(
-                RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE)).into(gambarMovie)
+            Glide.with(context).load(img).apply(RequestOptions.skipMemoryCacheOf(true)).into(gambarMovie)
 
             item_list.setOnClickListener {
                 val intent = Intent(context, MovieDetailActivity::class.java)

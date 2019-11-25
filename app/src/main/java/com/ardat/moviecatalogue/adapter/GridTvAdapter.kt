@@ -37,8 +37,7 @@ class GridTvAdapter (private val context: Context?, private val movie : ArrayLis
 
         internal fun bind(movie: ResultTvModel){
             val img = "https://image.tmdb.org/t/p/w185"+movie.poster_path
-            Glide.with(context).load(img).apply(RequestOptions.skipMemoryCacheOf(true)).apply(
-                RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE)).into(gambarMovie)
+            Glide.with(context).load(img).apply(RequestOptions.skipMemoryCacheOf(true)).into(gambarMovie)
 
             item_grid?.setOnClickListener {
                 val intent = Intent(context, TvDetailActivity::class.java)
