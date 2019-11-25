@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MovieDetailActivity" />
         <activity android:name=".activity.TvDetailActivity" />
+        <activity android:name=".activity.FavoriteActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

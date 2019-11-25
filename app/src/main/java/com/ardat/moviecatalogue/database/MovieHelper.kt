@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.ardat.moviecatalogue.database.DatabaseContract.MovieColoum.Companion.TABLE_NAME
 import com.ardat.moviecatalogue.database.DatabaseContract.MovieColoum.Companion._ID
+import com.ardat.moviecatalogue.database.DatabaseContract.MovieColoum.Companion.idMovie
 
 class MovieHelper (context: Context){
 
@@ -56,7 +57,7 @@ class MovieHelper (context: Context){
     }
 
     fun queryById(id: String): Cursor {
-        return database.query(DATABASE_TABLE, null, "$_ID = ?", arrayOf(id), null, null, null, null)
+        return database.query(DATABASE_TABLE, null, "$idMovie = ?", arrayOf(id), null, null, null, null)
     }
 
     fun insert(values: ContentValues?): Long {
@@ -64,10 +65,10 @@ class MovieHelper (context: Context){
     }
 
     fun update(id: String, values: ContentValues?): Int {
-        return database.update(DATABASE_TABLE, values, "$_ID = ?", arrayOf(id))
+        return database.update(DATABASE_TABLE, values, "$idMovie = ?", arrayOf(id))
     }
 
     fun deleteById(id: String): Int {
-        return database.delete(DATABASE_TABLE, "$_ID = '$id'", null)
+        return database.delete(DATABASE_TABLE, "$idMovie = '$id'", null)
     }
 }

@@ -162,6 +162,7 @@
     </integer-array>
 
     <string name="display" translatable="false">Tampilan</string>
+    <string name="favorite" translatable="false">Favorit</string>
     <string name="setting" translatable="false">Pengaturan</string>
     <string name="btn_kembali" translatable="false">Kembali</string>
     <string name="year" translatable="false">Tahun</string>
@@ -169,4 +170,8 @@
     <string name="movie" translatable="false">Film</string>
     <string name="tv" translatable="false">Serial TV</string>
     <string name="api_key" translatable="false">441f41bf2b06a320c6bcc8b1f1e8c352</string>
+    <string name="deletedFavorite">Dihapus Dari Favorit</string>
+    <string name="addFavorite">Ditambahkan ke Favorit</string>
+    <string name="failed">Gagal</string>
+    <string name="no_data">Tidak Ada Data</string>
 </resources>

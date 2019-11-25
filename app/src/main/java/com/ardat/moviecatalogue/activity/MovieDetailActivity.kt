@@ -7,10 +7,15 @@ import android.view.View
 import android.widget.*
 import com.ardat.moviecatalogue.R
 import com.ardat.moviecatalogue.database.DatabaseContract
+import com.ardat.moviecatalogue.database.MappingHelper
 import com.ardat.moviecatalogue.database.MovieHelper
 import com.ardat.moviecatalogue.model.ResultMovieModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var detail_back : Button? = null
@@ -20,9 +25,8 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var detail_score : TextView? = null
     private var detail_deskripsi : TextView? = null
     private var detail_favorite : ImageButton? = null
+    private var detail_back_atas : ImageButton? = null
 
-    private var movie: ResultMovieModel? = null
-    private var position: Int = 0
     private lateinit var movieHelper: MovieHelper
     private var title: String? = ""
     private var deskripsi: String? = ""
@@ -30,6 +34,7 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var tahun: String? = ""
     private var poster: String? = ""
     private var id: Int? = 0
+    private var available = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,7 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         init()
         ambilData()
+        loadMovieAsync()
     }
 
     private fun ambilData() {
@@ -68,9 +74,29 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
         detail_score = findViewById(R.id.detail_score) as TextView
         detail_deskripsi = findViewById(R.id.detail_deskripsi) as TextView
         detail_favorite = findViewById(R.id.detail_favorite) as ImageButton
+        detail_back_atas = findViewById(R.id.detail_back_atas) as ImageButton
 
         detail_back!!.setOnClickListener(this)
         detail_favorite!!.setOnClickListener(this)
+        detail_back_atas!!.setOnClickListener(this)
+    }
+
+    private fun loadMovieAsync() {
+        GlobalScope.launch(Dispatchers.Main) {
+            val deferredMovie = async(Dispatchers.IO) {
+                val cursor = movieHelper.queryAll()
+                MappingHelper.mapCursorMovie(cursor)
+            }
+            val rmm = deferredMovie.await()
+
+            if (rmm.contains(ResultMovieModel(score?.toDouble(), poster, id, title, deskripsi, tahun))){
+                detail_favorite?.setImageResource(R.drawable.ic_favorite_full)
+                available = true
+            } else {
+                detail_favorite?.setImageResource(R.drawable.ic_favorite)
+                available = false
+            }
+        }
     }
 
     private fun saveData(){
@@ -83,10 +109,25 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
         values.put(DatabaseContract.MovieColoum.gambarMovie, poster)
 
         val result = movieHelper.insert(values)
+        val add = getString(R.string.addFavorite)
         if (result > 0){
-            Toast.makeText(this, "Added Favorite", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, add, Toast.LENGTH_SHORT).show()
+            detail_favorite?.setImageResource(R.drawable.ic_favorite_full)
+            available = true
         } else {
             Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun deleteData(){
+        val result = movieHelper.deleteById(id.toString()).toLong()
+        val del = getString(R.string.deletedFavorite)
+        if (result > 0){
+            detail_favorite?.setImageResource(R.drawable.ic_favorite)
+            Toast.makeText(this, del, Toast.LENGTH_SHORT).show()
+            available = false
+        } else  {
+            detail_favorite?.setImageResource(R.drawable.ic_favorite_full)
         }
     }
 
@@ -95,8 +136,14 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
             R.id.detail_back -> {
                 onBackPressed()
             }
+            R.id.detail_back_atas -> {
+                onBackPressed()
+            }
             R.id.detail_favorite -> {
-                saveData()
+                if (available)
+                    deleteData()
+                else
+                    saveData()
             }
         }
     }
