@@ -174,4 +174,16 @@
     <string name="addFavorite">Ditambahkan ke Favorit</string>
     <string name="failed">Gagal</string>
     <string name="no_data">Tidak Ada Data</string>
+    <string name="title_settting">Pengaturan</string>
+    <string name="search">Pencarian</string>
+    <string name="appwidget_text">Katalog Film</string>
+    <string name="add_widget">Tambah Widget</string>
+    <string name="released_today">Ini dia, Update Terbaru Hari Ini</string>
+    <string name="released_daily">Ini dia, Update Harian kita</string>
+    <string name="released_dailydesk">Yuk, Cek Favorit Film Kamu</string>
+    <string name="notif_daily_on">Notif Harian AKTIF</string>
+    <string name="notif_daily_OFF">Notif Harian TIDAK AKTIF</string>
+    <string name="notif_upcoming_on">Notif Yang Akan Datanng AKTIF</string>
+    <string name="notif_upcoming_OFF">Notif Yang Akan Datanng TIDAK AKTIF</string>
+
 </resources>

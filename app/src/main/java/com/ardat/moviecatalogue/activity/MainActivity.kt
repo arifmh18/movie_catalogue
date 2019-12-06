@@ -3,7 +3,6 @@ package com.ardat.moviecatalogue.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.widget.ImageButton
 import androidx.viewpager.widget.ViewPager
 import com.ardat.moviecatalogue.R
@@ -34,8 +33,8 @@ class MainActivity : AppCompatActivity() {
         main_tab?.setupWithViewPager(main_viewPager)
 
         main_setting?.setOnClickListener {
-            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-            startActivity(intent)
+//            val mIntent = Intent(this, SettingPref::class.java)
+//            startActivity(mIntent)
         }
 
         main_fav?.setOnClickListener {

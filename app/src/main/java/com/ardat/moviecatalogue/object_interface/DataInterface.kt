@@ -6,6 +6,8 @@ import com.ardat.moviecatalogue.baserespon.DataMovieBaseRespon
 import com.ardat.moviecatalogue.baserespon.DataTvBaseRespon
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface DataInterface {
 
@@ -14,4 +16,10 @@ interface DataInterface {
 
     @GET(BuildConfig.BASE_URL+BuildConfig.API_TV+ BuildConfig.API_KEY)
     fun dataTv() : Call<DataTvBaseRespon>
+
+    @GET(BuildConfig.BASE_URL_SEARCH+BuildConfig.API_TV+ BuildConfig.API_KEY+"&language=en-US")
+    fun searchDataTv(@Query("query") key:String) : Call<DataTvBaseRespon>
+
+    @GET(BuildConfig.BASE_URL_SEARCH+BuildConfig.API_MOVIE  + BuildConfig.API_KEY+"&language=en-US")
+    fun searchDataMovie(@Query("query") key:String) : Call<DataMovieBaseRespon>
 }
