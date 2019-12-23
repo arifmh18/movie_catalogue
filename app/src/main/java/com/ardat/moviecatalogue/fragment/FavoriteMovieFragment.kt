@@ -1,6 +1,12 @@
 package com.ardat.moviecatalogue.fragment
 
+import android.app.Activity
+import android.content.Context
+import android.database.ContentObserver
+import android.database.Cursor
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ardat.moviecatalogue.R
 import com.ardat.moviecatalogue.adapter.GridAdapter
 import com.ardat.moviecatalogue.adapter.MovieAdapter
+import com.ardat.moviecatalogue.database.DatabaseContract.MovieColoum.Companion.CONTENT_URI
 import com.ardat.moviecatalogue.database.MappingHelper
 import com.ardat.moviecatalogue.database.MovieHelper
 import com.ardat.moviecatalogue.model.ResultMovieModel
@@ -32,12 +39,17 @@ class FavoriteMovieFragment : Fragment(), View.OnClickListener {
     private var movie_list_view : ImageButton? = null
     private var progressBar : ProgressBar? = null
     private var v : View? = null
+    private var mContext : Context? = null
 
     private var dataInterface : DataInterface? = null
-    private var movieHelper : MovieHelper? = null
     private var show = 0
 
     private var rmm : ArrayList<ResultMovieModel>? = null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        mContext = context
+    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -53,8 +65,16 @@ class FavoriteMovieFragment : Fragment(), View.OnClickListener {
 
         init()
 
-        movieHelper = MovieHelper.getInstance(context!!)
-        movieHelper?.open()
+        val handlerThread = HandlerThread("DataObserver")
+        handlerThread.start()
+        val handler = Handler(handlerThread.looper)
+        val myObserver = object : ContentObserver(handler) {
+            override fun onChange(self: Boolean) {
+                loadMovieAsync()
+            }
+        }
+
+        mContext?.contentResolver?.registerContentObserver(CONTENT_URI, true, myObserver)
 
         if(savedInstanceState != null) {
             rmm  = savedInstanceState.get("obj") as ArrayList<ResultMovieModel>
@@ -113,8 +133,8 @@ class FavoriteMovieFragment : Fragment(), View.OnClickListener {
         GlobalScope.launch(Dispatchers.Main) {
             progressBar(true)
             val deferredMovie = async(Dispatchers.IO) {
-                val cursor = movieHelper?.queryAll()
-                MappingHelper.mapCursorMovie(cursor!!)
+                val cursor = mContext?.contentResolver?.query(CONTENT_URI, null, null, null, null) as Cursor
+                MappingHelper.mapCursorMovie(cursor)
             }
             progressBar(false)
             rmm = deferredMovie.await()

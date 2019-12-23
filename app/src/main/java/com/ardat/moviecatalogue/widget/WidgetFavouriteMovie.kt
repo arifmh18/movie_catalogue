@@ -16,8 +16,8 @@ import com.ardat.moviecatalogue.R
 class WidgetFavouriteMovie : AppWidgetProvider() {
 
     companion object {
-        private const val TOAST_ACTION = "com.dicoding.picodiploma.TOAST_ACTION"
-        const val EXTRA_ITEM = "com.dicoding.picodiploma.EXTRA_ITEM"
+        private const val TOAST_ACTION = "com.ardat.moviecatalogue.TOAST_ACTION"
+        const val EXTRA_ITEM = "com.ardat.moviecatalogue.EXTRA_ITEM"
         private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
             val intent = Intent(context, StackWidgetService::class.java)
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)

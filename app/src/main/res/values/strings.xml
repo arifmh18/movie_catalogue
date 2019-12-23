@@ -184,5 +184,15 @@
     <string name="notif_daily_OFF">Daily Notif OFF</string>
     <string name="notif_upcoming_on">Upcoming Notif ON</string>
     <string name="notif_upcoming_OFF">Upcoming Notif OFF</string>
+    <string name="lang">Language</string>
+    <string name="key_lang">key_lang</string>
+    <string name="pref_title_notifications">Notifications</string>
+    <string name="lang_use">English</string>
+    <string name="key_today_reminder">key_today_reminder</string>
+    <string name="summary_daily_reminder">You will reveiced daily reminder every 7 AM</string>
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="key_release_reminder">key_release_reminder</string>
+    <string name="summary_release_reminder">You will receive daily movie release info every 8 AM</string>
+    <string name="release_reminder">New Movie Reminder</string>
 
 </resources>

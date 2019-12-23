@@ -1,12 +1,18 @@
 package com.ardat.moviecatalogue.activity
 
 import android.content.ContentValues
+import android.database.ContentObserver
+import android.database.Cursor
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
 import android.view.View
 import android.widget.*
 import com.ardat.moviecatalogue.R
 import com.ardat.moviecatalogue.database.DatabaseContract
+import com.ardat.moviecatalogue.database.DatabaseContract.MovieColoum.Companion.CONTENT_URI
 import com.ardat.moviecatalogue.database.MappingHelper
 import com.ardat.moviecatalogue.database.MovieHelper
 import com.ardat.moviecatalogue.model.ResultMovieModel
@@ -42,6 +48,17 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         init()
         ambilData()
+        val handlerThread = HandlerThread("DataObserver")
+        handlerThread.start()
+        val handler = Handler(handlerThread.looper)
+        val myObserver = object : ContentObserver(handler) {
+            override fun onChange(self: Boolean) {
+                loadMovieAsync()
+            }
+        }
+
+        contentResolver.registerContentObserver(CONTENT_URI, true, myObserver)
+
         loadMovieAsync()
     }
 
@@ -64,9 +81,6 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun init(){
-        movieHelper = MovieHelper.getInstance(applicationContext)
-        movieHelper.open()
-
         detail_back = findViewById(R.id.detail_back) as Button
         detail_gambar = findViewById(R.id.detail_gambar) as ImageView
         detail_judul = findViewById(R.id.detail_judul) as TextView
@@ -84,7 +98,7 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
     private fun loadMovieAsync() {
         GlobalScope.launch(Dispatchers.Main) {
             val deferredMovie = async(Dispatchers.IO) {
-                val cursor = movieHelper.queryAll()
+                val cursor = contentResolver?.query(CONTENT_URI, null, null, null, null) as Cursor
                 MappingHelper.mapCursorMovie(cursor)
             }
             val rmm = deferredMovie.await()
@@ -108,27 +122,22 @@ class MovieDetailActivity : AppCompatActivity(), View.OnClickListener {
         values.put(DatabaseContract.MovieColoum.tahunMovie, tahun)
         values.put(DatabaseContract.MovieColoum.gambarMovie, poster)
 
-        val result = movieHelper.insert(values)
+        contentResolver.insert(CONTENT_URI, values)
         val add = getString(R.string.addFavorite)
-        if (result > 0){
-            Toast.makeText(this, add, Toast.LENGTH_SHORT).show()
-            detail_favorite?.setImageResource(R.drawable.ic_favorite_full)
-            available = true
-        } else {
-            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
-        }
+        Toast.makeText(this, add, Toast.LENGTH_SHORT).show()
+        available = true
+        detail_favorite?.setImageResource(R.drawable.ic_favorite_full)
+        return
     }
 
     private fun deleteData(){
-        val result = movieHelper.deleteById(id.toString()).toLong()
+        contentResolver.delete(
+            Uri.parse(CONTENT_URI.toString() + "/" + id), null, null)
         val del = getString(R.string.deletedFavorite)
-        if (result > 0){
-            detail_favorite?.setImageResource(R.drawable.ic_favorite)
-            Toast.makeText(this, del, Toast.LENGTH_SHORT).show()
-            available = false
-        } else  {
-            detail_favorite?.setImageResource(R.drawable.ic_favorite_full)
-        }
+        Toast.makeText(this, del, Toast.LENGTH_SHORT).show()
+        available = false
+        detail_favorite?.setImageResource(R.drawable.ic_favorite)
+        return
     }
 
     override fun onClick(v: View) {

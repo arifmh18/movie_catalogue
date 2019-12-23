@@ -1,10 +1,14 @@
 package com.ardat.moviecatalogue.database
 
+import android.net.Uri
 import android.provider.BaseColumns
 
-internal class DatabaseContract {
+object DatabaseContract {
 
-    internal class MovieColoum : BaseColumns {
+    const val AUTHORITY = "com.ardat.moviecatalogue"
+    const val SCHEME = "content"
+
+    class MovieColoum : BaseColumns {
         companion object {
             const val TABLE_NAME = "movieCatalogue"
             const val TABLE_NAME_TV = "tvCatalogue"
@@ -15,6 +19,17 @@ internal class DatabaseContract {
             const val deskripsiMovie = "deskripsi"
             const val tahunMovie = "tahun"
             const val scoreMovie = "score"
+
+            // untuk membuat URI content://com.dicoding.picodiploma.mynotesapp/note
+            val CONTENT_URI: Uri = Uri.Builder().scheme(SCHEME)
+                .authority(AUTHORITY)
+                .appendPath(TABLE_NAME)
+                .build()
+
+            val CONTENT_URI_TV: Uri = Uri.Builder().scheme(SCHEME)
+                .authority(AUTHORITY)
+                .appendPath(TABLE_NAME_TV)
+                .build()
         }
     }
 }

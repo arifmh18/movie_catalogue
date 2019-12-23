@@ -1,6 +1,11 @@
 package com.ardat.moviecatalogue.fragment
 
+import android.content.Context
+import android.database.ContentObserver
+import android.database.Cursor
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +22,8 @@ import com.ardat.moviecatalogue.adapter.GridTvAdapter
 import com.ardat.moviecatalogue.adapter.MovieAdapter
 import com.ardat.moviecatalogue.adapter.MovieTvAdapter
 import com.ardat.moviecatalogue.baserespon.DataTvBaseRespon
+import com.ardat.moviecatalogue.database.DatabaseContract
+import com.ardat.moviecatalogue.database.DatabaseContract.MovieColoum.Companion.CONTENT_URI_TV
 import com.ardat.moviecatalogue.database.MappingHelper
 import com.ardat.moviecatalogue.database.MovieHelper
 import com.ardat.moviecatalogue.database.TvHelper
@@ -42,8 +49,14 @@ class FavoriteTvFragment : Fragment(), View.OnClickListener {
     private var dataInterface : DataInterface? = null
     private var tvHelper : TvHelper? = null
     private var show = 0
+    private var mContext : Context? = null
 
     private var rmm : ArrayList<ResultTvModel>? = null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        mContext = context
+    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -59,8 +72,16 @@ class FavoriteTvFragment : Fragment(), View.OnClickListener {
 
         init()
 
-        tvHelper = TvHelper.getInstance(context!!)
-        tvHelper?.open()
+        val handlerThread = HandlerThread("DataObserver")
+        handlerThread.start()
+        val handler = Handler(handlerThread.looper)
+        val myObserver = object : ContentObserver(handler) {
+            override fun onChange(self: Boolean) {
+                loadTvAsync()
+            }
+        }
+
+        mContext?.contentResolver?.registerContentObserver(CONTENT_URI_TV, true, myObserver)
 
         if(savedInstanceState != null) {
             rmm  = savedInstanceState.get("obj") as ArrayList<ResultTvModel>
@@ -120,8 +141,8 @@ class FavoriteTvFragment : Fragment(), View.OnClickListener {
         GlobalScope.launch(Dispatchers.Main) {
             progressBar(true)
             val deferredMovie = async(Dispatchers.IO) {
-                val cursor = tvHelper?.queryAll()
-                MappingHelper.mapCursorTv(cursor!!)
+                val cursor = mContext?.contentResolver?.query(CONTENT_URI_TV, null, null, null, null) as Cursor
+                MappingHelper.mapCursorTv(cursor)
             }
             progressBar(false)
             rmm = deferredMovie.await()

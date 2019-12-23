@@ -37,4 +37,16 @@ object MappingHelper {
         }
         return tvList
     }
+
+    fun mapCursorMovieToObject(cursor: Cursor): ResultMovieModel {
+        cursor.moveToNext()
+        val id = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.MovieColoum._ID))
+        val idMovie = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.MovieColoum.idMovie))
+        val title = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.MovieColoum.judulMovie))
+        val description = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.MovieColoum.deskripsiMovie))
+        val score = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.MovieColoum.scoreMovie))
+        val tahun = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.MovieColoum.tahunMovie))
+        val poster = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.MovieColoum.gambarMovie))
+        return ResultMovieModel(score.toDouble(),poster,idMovie,title,description,tahun)
+    }
 }

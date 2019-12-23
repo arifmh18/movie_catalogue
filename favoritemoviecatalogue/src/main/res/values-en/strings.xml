@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="display" translatable="false">Display</string>
+    <string name="favorite" translatable="false">Favorite</string>
+    <string name="setting" translatable="false">Setting</string>
+    <string name="btn_kembali" translatable="false">Kembali</string>
+    <string name="year" translatable="false">Year</string>
+    <string name="score" translatable="false">Score Viewer</string>
+    <string name="movie" translatable="false">Movie</string>
+    <string name="tv" translatable="false">TV Series</string>
+    <string name="api_key" translatable="false">441f41bf2b06a320c6bcc8b1f1e8c352</string>
+    <string name="deletedFavorite">Deleted From Favorite</string>
+    <string name="addFavorite">Added Favorite</string>
+    <string name="failed">Failed</string>
+    <string name="no_data">Tidak Ada Data</string>
+    <string name="title_settting">Pengaturan</string>
+    <string name="search">Search</string>
+    <string name="appwidget_text">Movie Catalogue</string>
+    <string name="add_widget">Add widget</string>
+    <string name="released_today">Here it is, Today Updated</string>
+    <string name="released_daily">Here it is, Daily Updated</string>
+    <string name="released_dailydesk">Come, Check Your Favorite Film</string>
+    <string name="notif_daily_on">Daily Notif ON</string>
+    <string name="notif_daily_OFF">Daily Notif OFF</string>
+    <string name="notif_upcoming_on">Upcoming Notif ON</string>
+    <string name="notif_upcoming_OFF">Upcoming Notif OFF</string>
+
+</resources>

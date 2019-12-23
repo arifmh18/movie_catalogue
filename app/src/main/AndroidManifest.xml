@@ -4,6 +4,8 @@
     package="com.ardat.moviecatalogue">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <permission android:name="com.ardat.moviecatalogue.READ_DATABASE" android:protectionLevel="normal"/>
+    <permission android:name="com.ardat.moviecatalogue.WRITE_DATABASE" android:protectionLevel="normal"/>
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <provider
+            android:name=".provider.ContentProvider"
+            android:authorities="com.ardat.moviecatalogue"
+            android:exported="true"
+            android:readPermission="com.ardat.moviecatalogue.READ_DATABASE"
+            android:writePermission="com.ardat.moviecatalogue.WRITE_DATABASE"/>
 
         <activity android:name=".activity.MovieDetailActivity" />
         <activity android:name=".activity.TvDetailActivity" />
@@ -38,7 +46,6 @@
         <service
             android:name=".widget.StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
     </application>
 
 </manifest>
