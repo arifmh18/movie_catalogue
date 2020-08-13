@@ -25,5 +25,15 @@
     <string name="notif_daily_OFF">Notif Harian TIDAK AKTIF</string>
     <string name="notif_upcoming_on">Notif Yang Akan Datanng AKTIF</string>
     <string name="notif_upcoming_OFF">Notif Yang Akan Datanng TIDAK AKTIF</string>
+    <string name="lang">Bahasa</string>
+    <string name="key_lang">key_lang</string>
+    <string name="pref_title_notifications">Pemberitahuan</string>
+    <string name="lang_use">Indonesia</string>
+    <string name="key_today_reminder">key_today_reminder</string>
+    <string name="summary_daily_reminder">Kamu akan mendapatkan pengingat harian setiap jam 7 pagi</string>
+    <string name="daily_reminder">Pengingat Harian</string>
+    <string name="key_release_reminder">key_release_reminder</string>
+    <string name="summary_release_reminder">Kamu akan mendapatkan pemberitahuan setiap ada film baru setiap jam 20.00 WIB</string>
+    <string name="release_reminder">Pengingat Film Baru</string>
 
 </resources>

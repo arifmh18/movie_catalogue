@@ -193,7 +193,7 @@
     <string name="summary_daily_reminder">Kamu akan mendapatkan pengingat harian setiap jam 7 pagi</string>
     <string name="daily_reminder">Pengingat Harian</string>
     <string name="key_release_reminder">key_release_reminder</string>
-    <string name="summary_release_reminder">Kamu akan mendapatkan pemberitahuan setiap ada film baru setiap jam 20.00 WIB</string>
+    <string name="summary_release_reminder">Kamu akan mendapatkan pemberitahuan setiap ada film baru setiap jam 8 pagi</string>
     <string name="release_reminder">Pengingat Film Baru</string>
 
 </resources>

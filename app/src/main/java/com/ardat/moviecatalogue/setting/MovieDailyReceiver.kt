@@ -9,16 +9,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import android.widget.Toast
-
-import java.util.Calendar
-
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.ardat.moviecatalogue.R
 import com.ardat.moviecatalogue.activity.MainActivity
+import java.util.*
 
 class MovieDailyReceiver : BroadcastReceiver() {
 
@@ -89,8 +86,6 @@ class MovieDailyReceiver : BroadcastReceiver() {
                 getPendingIntent(context)
             )
         }
-
-
 
         Toast.makeText(context, "Daily Notif ON", Toast.LENGTH_SHORT).show()
     }

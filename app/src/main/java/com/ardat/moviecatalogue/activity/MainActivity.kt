@@ -1,12 +1,13 @@
 package com.ardat.moviecatalogue.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.ardat.moviecatalogue.R
 import com.ardat.moviecatalogue.adapter.TabAdapter
+import com.ardat.moviecatalogue.setting.SettingPref
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         main_tab?.setupWithViewPager(main_viewPager)
 
         main_setting?.setOnClickListener {
-//            val mIntent = Intent(this, SettingPref::class.java)
-//            startActivity(mIntent)
+            val mIntent = Intent(this, SettingPref::class.java)
+            startActivity(mIntent)
         }
 
         main_fav?.setOnClickListener {

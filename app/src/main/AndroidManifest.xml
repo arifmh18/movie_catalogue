@@ -46,6 +46,20 @@
         <service
             android:name=".widget.StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <activity
+            android:name=".setting.SettingPref"
+            android:theme="@style/AppThemeActionBar"
+            android:parentActivityName=".activity.MainActivity" />
+
+        <receiver
+            android:name=".setting.MovieDailyReceiver"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver
+            android:name=".setting.MovieUpcomingReceiver"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
